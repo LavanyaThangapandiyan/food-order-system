@@ -11,7 +11,7 @@ public interface OrderDao {
 	public int deleteOrderDetails() throws ClassNotFoundException, SQLException;
 	public int updateOrderQuantity(int orderId,int quantity) throws ClassNotFoundException, SQLException;
 	public void findOrderQuantity(int orderId) throws ClassNotFoundException, SQLException;
-	public void findOrderPickupDate(int orderId) throws ClassNotFoundException, SQLException;
+	public void findOrderDate(int orderId) throws ClassNotFoundException, SQLException;
 	
 
 }

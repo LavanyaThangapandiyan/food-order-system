@@ -5,23 +5,17 @@ public class Customer {
 	private int id;
 	private String email;
 	private String phoneNo;
-	private String firstName;
-	private String lastName;
-	private int paymentId;
-	private int foodId;
+	private String name;
 	public Customer()
 	{
 		
 	}
-	public Customer(int customerId,String email,String phoneNo,String firstName,String lastName,int paymentId,int foodId)
+	public Customer(int id,String email,String phoneNo,String name)
 	{
-		this.id=customerId;
+		this.id=id;
 		this.email=email;
 		this.phoneNo=phoneNo;
-		this.firstName=firstName;
-		this.lastName=lastName;
-		this.paymentId=paymentId;
-		this.foodId=foodId;
+		this.name=name;
 	}
 	public int getId() {
 		return id;
@@ -41,40 +35,18 @@ public class Customer {
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public int getPaymentId() {
-		return paymentId;
-	}
-	public void setPaymentId(int paymentId) {
-		this.paymentId = paymentId;
-	}
-	public int getFoodId() {
-		return foodId;
-	}
-	public void setFoodId(int foodId) {
-		this.foodId = foodId;
+	public void setName(String name) {
+		this.name = name;
 	}
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", email=" + email + ", phoneNo=" + phoneNo + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", paymentId=" + paymentId + ", foodId=" + foodId + ", getId()=" + getId()
-				+ ", getEmail()=" + getEmail() + ", getPhoneNo()=" + getPhoneNo() + ", getFirstName()=" + getFirstName()
-				+ ", getLastName()=" + getLastName() + ", getPaymentId()=" + getPaymentId() + ", getFoodId()="
-				+ getFoodId() + "]";
+		return "Customer [id=" + id + ", email=" + email + ", phoneNo=" + phoneNo + ", name=" + name + ", getId()="
+				+ getId() + ", getEmail()=" + getEmail() + ", getPhoneNo()=" + getPhoneNo() + ", getName()=" + getName()
+				+ "]";
 	}
 	
 	
-	
-
 }

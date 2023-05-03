@@ -21,15 +21,12 @@ public class CustomerImpl implements CustomerDao
 	public void saveCustomerDetails(Customer cus) throws ClassNotFoundException, SQLException {
 		
 		Connection con=ConnectionUtil.getConnection();
-		String s="insert into customer(id,email,phone_no,first_name,last_name,payment_id,food_id)values(?,?,?,?,?,?,?)";
+		String s="insert into customer(id,email,phone_no,name)values(?,?,?,?)";
 		PreparedStatement ps=con.prepareStatement(s);
 		ps.setInt(1,cus.getId());
 		ps.setString(2,cus.getEmail());
 		ps.setString(3,cus.getPhoneNo());
-		ps.setString(4, cus.getFirstName());
-		ps.setString(5, cus.getLastName());
-		ps.setInt(6, cus.getPaymentId());
-		ps.setInt(7, cus.getFoodId());
+		ps.setString(4, cus.getName());
 		int executeUpdate = ps.executeUpdate();
 		System.out.println(executeUpdate);
 		
@@ -39,7 +36,7 @@ public class CustomerImpl implements CustomerDao
 	{
 		// TODO Auto-generated method stub
 	    Connection con=ConnectionUtil.getConnection();
-	    String s="select id,email,phone_no,first_name,last_name,payment_id,food_id from customer ";
+	    String s="select id,email,phone_no,name from customer ";
 	    PreparedStatement ps=con.prepareStatement(s);
 	    ResultSet rs=ps.executeQuery();
 	    ArrayList list=new ArrayList<>();
@@ -48,18 +45,13 @@ public class CustomerImpl implements CustomerDao
 	    	int id=rs.getInt(1);
 	    	String email=rs.getString(2);
 	    	String phone=rs.getString(3);
-	    	String firstName=rs.getString(4);
-	    	String lastName=rs.getString(5);
-	    	int payment=rs.getInt(6);
-	    	int foodId=rs.getInt(7);
+	    	String name=rs.getString(4);
+	    	
 	    	Customer cs=new Customer();
 	    	cs.setId(id);
 	    	cs.setEmail(email);
 	    	cs.setPhoneNo(phone);
-	    	cs.setFirstName(firstName);
-	    	cs.setLastName(lastName);
-	    	cs.setPaymentId(payment);
-	    	cs.setFoodId(foodId);
+	    	cs.setName(name);
 	    	list.add(cs);
 	    	
 	    }	
@@ -92,23 +84,13 @@ public class CustomerImpl implements CustomerDao
 	}
 
 	@Override
-	public void findCustomerPaymentId(int customerId) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		Connection con=ConnectionUtil.getConnection();
-		Statement s=con.createStatement();
-		ResultSet rs=s.executeQuery("select id,payment_id from customer where id='"+customerId+"'");
-		while(rs.next())
-			System.out.println(rs.getString(1)+"\t"+rs.getString(2));
-	}
-
-	@Override
 	public void findCustomerName(int customerId) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
 		Statement s=con.createStatement();
-		ResultSet rs=s.executeQuery("select id,first_name,last_name from customer where id='"+customerId+"'");
+		ResultSet rs=s.executeQuery("select id,name from customer where id='"+customerId+"'");
 		while(rs.next())
-			System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3));
+			System.out.println(rs.getString(1)+"\t"+rs.getString(2));
 		
 	}
 	@Override
@@ -116,7 +98,7 @@ public class CustomerImpl implements CustomerDao
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
 		Statement s=con.createStatement();
-		ResultSet rs=s.executeQuery("select id,first_name,phone_no from customer where id='"+customerId+"'");
+		ResultSet rs=s.executeQuery("select id,name,phone_no from customer where id='"+customerId+"'");
 		while(rs.next())
 			System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3));
 		

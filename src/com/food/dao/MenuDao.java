@@ -1,15 +1,15 @@
 package com.food.dao;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import com.food.model.Menu;
 
 public interface MenuDao 
 {
-	public void saveMenuDetails();
-	public List menuList();
-	public void updatePrice(int menuId,int price);
-	public void updateStartDate(int menuId,int startDate);
-	public void updateEndDate(int menuId,int endDate);
-	public int deleteMenuDetails();
+	public void saveMenuDetails(Menu menu) throws ClassNotFoundException, SQLException;
+	public List<Menu> menuList() throws ClassNotFoundException, SQLException;
+	public int deleteMenuDetails() throws ClassNotFoundException, SQLException;
 	
 
 }

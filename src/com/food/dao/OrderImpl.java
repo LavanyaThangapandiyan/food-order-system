@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 import java.util.Scanner;
 
 import com.food.model.Customer;
@@ -20,13 +21,13 @@ public class OrderImpl implements OrderDao {
 	public void saveOrderDetails(Order or) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
-		String s="insert into order_food(id,order_date,customer_id,quantity,pickup_date)values(?,?,?,?,?)";
+		String s="insert into orderr(id,date,customer_id,quantity,food_id)values(?,?,?,?,?)";
 		PreparedStatement ps=con.prepareStatement(s);
 		ps.setInt(1, or.getId());
 		ps.setString(2, or.getDate());
 		ps.setInt(3,or.getCustomerId());
-		ps.setInt(4, or.getCustomerId());
-		ps.setString(5, or.getPickupDate());
+		ps.setInt(4, or.getQuantity());
+		ps.setInt(5, or.getFoodId());
 		int executeUpdate = ps.executeUpdate();
 		System.out.println(executeUpdate);
 		
@@ -36,7 +37,7 @@ public class OrderImpl implements OrderDao {
 	public List<Order> orderList() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		 Connection con=ConnectionUtil.getConnection();
-		 String s="select id,order_date,customer_id,quantity,pickup_date from order_food";
+		 String s="select id,date,customer_id,quantity,food_id from orderr";
 			PreparedStatement ps=con.prepareStatement(s);
 			ResultSet rs=ps.executeQuery();
 			ArrayList list=new ArrayList<>();
@@ -46,13 +47,13 @@ public class OrderImpl implements OrderDao {
 				String date=rs.getString(2);
 				int customerId=rs.getInt(3);
 				int quantity=rs.getInt(4);
-				String pickupDate=rs.getString(5);
+				int foodId=rs.getInt(5);
 				Order or=new Order();
 				or.setId(id);
 				or.setDate(date);
 				or.setCustomerId(customerId);
 				or.setQuantity(quantity);
-				or.setPickupDate(pickupDate);
+				or.setFoodId(foodId);
 				list.add(or);
 				
 			}
@@ -67,7 +68,7 @@ public class OrderImpl implements OrderDao {
 		System.out.println("Do you want Delete the Order Details: \n Please Enter the Order ID:");
 		int orderId=sc.nextInt();
 		Connection con=ConnectionUtil.getConnection();
-		String s="delete from order_food where id='"+orderId+"'";
+		String s="delete from orderr where id='"+orderId+"'";
 		PreparedStatement ps=con.prepareStatement(s);
 		int executeUpdate = ps.executeUpdate();
 		System.out.println(executeUpdate);
@@ -78,7 +79,7 @@ public class OrderImpl implements OrderDao {
 	public int updateOrderQuantity(int orderId, int quantity) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
-		String s="update order_food set quantity='"+quantity+"' where id='"+orderId+"'";
+		String s="update orderr set quantity='"+quantity+"' where id='"+orderId+"'";
 		PreparedStatement ps=con.prepareStatement(s);
 		int executeUpdate = ps.executeUpdate();
 		System.out.println(executeUpdate);
@@ -90,17 +91,17 @@ public class OrderImpl implements OrderDao {
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
 		Statement s=con.createStatement();
-		ResultSet rs=s.executeQuery("select quantity from order_food where id='"+orderId+"'");
+		ResultSet rs=s.executeQuery("select quantity from orderr where id='"+orderId+"'");
 		while(rs.next())
 			System.out.println(rs.getString(1));
 	}
 
 	@Override
-	public void findOrderPickupDate(int orderId) throws ClassNotFoundException, SQLException {
+	public void findOrderDate(int orderId) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
 		Statement s=con.createStatement();
-		ResultSet rs=s.executeQuery("select pickup_date from order_food where id='"+orderId+"'");
+		ResultSet rs=s.executeQuery("select date from orderr where id='"+orderId+"'");
 		while(rs.next())
 			System.out.println(rs.getString(1));
 		
