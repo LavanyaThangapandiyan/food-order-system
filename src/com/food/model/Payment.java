@@ -1,17 +1,19 @@
 package com.food.model;
 
+import java.sql.Date;
+
 public class Payment {
 	private int id;
 	private int customerId;
 	private int orderId;
-	private String paymentDate;
+	private Date paymentDate;
 	private double amount;
 	private String paymentType;
 	public Payment()
 	{
 		
 	}
-	public Payment(int id,int customerId,int orderId,String paymentDate,double amount,String paymentType)
+	public Payment(int id,int customerId,int orderId,Date paymentDate,double amount,String paymentType)
 	{
 		this.id=id;
 		this.customerId=customerId;
@@ -38,10 +40,10 @@ public class Payment {
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
-	public String getPaymentDate() {
+	public Date getPaymentDate() {
 		return paymentDate;
 	}
-	public void setPaymentDate(String paymentDate) {
+	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 	public double getAmount() {
@@ -63,6 +65,5 @@ public class Payment {
 				+ ", getCustomerId()=" + getCustomerId() + ", getOrderId()=" + getOrderId() + ", getPaymentDate()="
 				+ getPaymentDate() + ", getAmount()=" + getAmount() + ", getPaymentType()=" + getPaymentType() + "]";
 	}
-	
 
 }

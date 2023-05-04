@@ -20,17 +20,10 @@ public class TestOrderItem {
 		System.out.println("Enter Food ID");
 		int foodId=sc.nextInt();
 		OrderItem ord=new OrderItem();
-		if(orderId>=10)
-		{
 			ord.setId(orderId);
-			if(foodId>=2000)
-			{
 				ord.setFoodId(foodId);
         or.saveOrderItemDetails(ord);
-	    }else
-		System.out.println("Invalid Food Id");
-		}else
-			System.out.println("Invalid Order Id");
+
 		
 		//or.deleteOrderItemDetails();
 		

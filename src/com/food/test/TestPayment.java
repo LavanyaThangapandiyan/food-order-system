@@ -24,42 +24,18 @@ public class TestPayment
 		int customerId=sc.nextInt();
 		System.out.println("Enter Order ID");
 		int orderId=sc.nextInt();
-		System.out.println("Enter Date");
-		String date=sc.next();
 		System.out.println("Enter Payment Type");
 		String type=sc.next();
 		System.out.println("Enter Amount");
 		int amount=sc.nextInt();
 		Payment obj=new Payment();
-		if(id>100000){
 			obj.setId(id);	
-		if(customerId>=1){
 			obj.setCustomerId(customerId);
-		if(orderId>=10) {
 			obj.setOrderId(orderId);
-			    Pattern p=Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
-		       Matcher m=p.matcher(date);
-		       boolean am=m.matches();
-		       if(am) {
-		    	   obj.setPaymentDate(date);
-		    	   if(amount>0)
-			    		  obj.setAmount(amount);
-		    	   Pattern p1=Pattern.compile("[a-zA-Z]+");
-		    	   Matcher m1=p1.matcher(type);
-		    	   boolean typ=m1.matches();
-		    	   if(typ) {
-		    		   obj.setPaymentType(type);
-		    	   pay.savePaymentDetails(obj);
-		       }else
-		    	   System.out.println("Invalid Payment Type");
-		}else
-			System.out.println("Invalid Date");
-		}else
-			System.out.println("Invalid Order Id");
-		}else
-			System.out.println("Invalid Customer Id");
-	   } else
-		   System.out.println("Invalid Id");
+		   obj.setAmount(amount);
+		    obj.setPaymentType(type);
+		   pay.savePaymentDetails(obj);
+	   
 		/*List<Payment> paymentDetailsList = pay.paymentDetailsList();
 		System.out.println(paymentDetailsList);*/
 		

@@ -10,42 +10,56 @@ import java.util.Scanner;
 
 import com.food.model.OrderItem;
 import com.food.util.ConnectionUtil;
+import com.food.validation.Validation;
 
 public class OrderItemImpl implements OrderItemDao {
-
+Validation valid=new Validation();
 	@Override
-	public void saveOrderItemDetails(OrderItem orit) throws ClassNotFoundException, SQLException {
+	// Insert order item details
+	public void saveOrderItemDetails(OrderItem orit) throws ClassNotFoundException, SQLException 
+	{
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
-		String s="insert into order_item (order_id,food_id)values(?,?)";
-		PreparedStatement ps=con.prepareStatement(s);
+		String insert="insert into order_item (order_id,food_id)values(?,?)";
+		PreparedStatement ps=con.prepareStatement(insert);
+		boolean id=valid.idValidation(orit.getId());
+		boolean fodId=valid.idValidation(orit.getFoodId());
+		if(id==true) {
 		ps.setInt(1, orit.getId());
+		if(fodId==true) {
 		ps.setInt(2,orit.getFoodId());
+		}else
+			System.out.println("Invalid food Id");
+		}System.out.println("Invalid id");
 		int executeUpdate = ps.executeUpdate();
 		System.out.println(executeUpdate);
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter Food ID");	
 		int foodId=sc.nextInt();
-		String s1="select unit_price from food_item where id='"+foodId+"'";
-		PreparedStatement ps1=con.prepareStatement(s1);
+		String find="select unit_price from food_item where id=?";
+		PreparedStatement ps1=con.prepareStatement(find);
+		ps.setInt(1,foodId);
 		ResultSet rs=ps1.executeQuery();
 		while(rs.next())
 		{
 			int price=rs.getInt(1);
-			String s3="update order_item set unit_price='"+price+"' where food_id='"+foodId+"' ";
-			PreparedStatement ps3=con.prepareStatement(s3);
+			String update="update order_item set unit_price=? where food_id=?";
+			PreparedStatement ps3=con.prepareStatement(update);
 			int executeUpdate2 = ps3.executeUpdate();
 			System.out.println(executeUpdate2);
 			System.out.println("Enter Order ID");
 			int orderId=sc.nextInt();
-			String s4="select quantity from orderr where id='"+orderId+"'";
-			PreparedStatement ps4=con.prepareStatement(s4);
+			String find1="select quantity from orderr where id=?";
+			PreparedStatement ps4=con.prepareStatement(find1);
+			ps4.setInt(1,foodId);
 			ResultSet rs4=ps4.executeQuery();
 			while(rs4.next())
 			{
 				int quantity=rs4.getInt(1);
-				String s2="update order_item set quantity='"+quantity+"' where food_id='"+foodId+"'";
-				PreparedStatement ps2=con.prepareStatement(s2);
+				String update1="update order_item set quantity=? where food_id=?";
+				PreparedStatement ps2=con.prepareStatement(update1);
+				ps2.setInt(1,foodId);
+				ps2.setInt(2,quantity);
 				int executeUpdate22 = ps2.executeUpdate();
 				System.out.println(executeUpdate22);
 		}
@@ -53,15 +67,15 @@ public class OrderItemImpl implements OrderItemDao {
 			
 		}	
 	}
-
+//Display the list of Order Item
 	@Override
 	public List<OrderItem> orderItemList() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
-		String s="select order_id,food_id,quantity,unit_price from order_item";
-		PreparedStatement ps=con.prepareStatement(s);
+		String orderList="select order_id,food_id,quantity,unit_price from order_item";
+		PreparedStatement ps=con.prepareStatement(orderList);
 		ResultSet rs=ps.executeQuery();
-		ArrayList list=new ArrayList<>();
+		ArrayList orderItem=new ArrayList<>();
 		while(rs.next())
 		{
 			int orderId=rs.getInt(1);
@@ -73,22 +87,31 @@ public class OrderItemImpl implements OrderItemDao {
 			or.setFoodId(foodId);
 			or.setQuantity(quantity);
 			or.setUnitPrice(unitPrice);
-			list.add(or);
+			orderItem.add(or);
 		}
 		
-		return list;
+		return orderItem;
 	}
-
+// Delete order Item
 	@Override
 	public int deleteOrderItemDetails() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
 		Scanner sc=new Scanner(System.in);
+		System.out.println("if you want to check the id is there \n Enter the id");
+		int id=sc.nextInt();
+		String find="select id from order_item where id=?";
+		PreparedStatement ps=con.prepareStatement(find);
+		ps.setInt(1, id);
+		ResultSet rs=ps.executeQuery();
+		while(rs.next())
+			System.out.println("THE ID IS THERE:"+rs.getInt(1));
 		System.out.println(" if you want delete order item \n Enter food id");
 		int orderId=sc.nextInt();
-		String s="delete from order_item where food_id='"+orderId+"'";
-		PreparedStatement ps=con.prepareStatement(s);
-		int executeUpdate = ps.executeUpdate();
+		String delete="delete from order_item where food_id=?";
+		PreparedStatement ps1=con.prepareStatement(delete);
+		ps1.setInt(1,orderId);
+		int executeUpdate = ps1.executeUpdate();
 		System.out.println(executeUpdate);
 		return executeUpdate;
 	}

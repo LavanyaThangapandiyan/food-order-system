@@ -1,10 +1,10 @@
 package com.food.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Order {
 	private int id;
-	private String date;
+	private Date date;
 	private int customerId;
 	private int quantity;
 	private int foodId;
@@ -12,7 +12,7 @@ public class Order {
 public Order() {
 	
 }
-public Order(int id,String date,int customerId,int quantity,int foodId )
+public Order(int id,Date date,int customerId,int quantity,int foodId )
 {
 	this.id=id;
 	this.date=date;
@@ -26,10 +26,10 @@ public int getId() {
 public void setId(int id) {
 	this.id = id;
 }
-public String getDate() {
+public Date getDate() {
 	return date;
 }
-public void setDate(String date) {
+public void setDate(Date date) {
 	this.date = date;
 }
 public int getCustomerId() {
@@ -53,8 +53,9 @@ public void setFoodId(int foodId) {
 @Override
 public String toString() {
 	return "Order [id=" + id + ", date=" + date + ", customerId=" + customerId + ", quantity=" + quantity + ", foodId="
-			+ foodId + ", getId()=" + getId() + ", getDate()=" + getDate() + ", getCustomerId()=" + getCustomerId()
-			+ ", getQuantity()=" + getQuantity() + ", getFoodId()=" + getFoodId() + "]";
+			+ foodId + "]";
 }
+
+
 
 }

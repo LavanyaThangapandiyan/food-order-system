@@ -21,15 +21,9 @@ public class TestMenu {
 				System.out.println("Enter Food Id");
 				int foodId=sc.nextInt();
 				Menu obj=new Menu();
-				if(id>1000) {
 				obj.setId(id);
-				if(foodId>=2000) {
 				obj.setFoodId(foodId);
 				menu.saveMenuDetails(obj);
-				}else
-					System.out.println("Invalid Food Id");
-				}else
-					System.out.println("Invalid Menu Id");
 		
 		
 		//menu.deleteMenuDetails();

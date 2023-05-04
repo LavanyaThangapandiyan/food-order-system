@@ -4,7 +4,7 @@ public class Customer {
 	
 	private int id;
 	private String email;
-	private String phoneNo;
+	private String phoneNumber;
 	private String name;
 	public Customer()
 	{
@@ -14,7 +14,7 @@ public class Customer {
 	{
 		this.id=id;
 		this.email=email;
-		this.phoneNo=phoneNo;
+		this.phoneNumber=phoneNumber;
 		this.name=name;
 	}
 	public int getId() {
@@ -29,11 +29,11 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPhoneNo() {
-		return phoneNo;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	public String getName() {
 		return name;
@@ -43,9 +43,7 @@ public class Customer {
 	}
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", email=" + email + ", phoneNo=" + phoneNo + ", name=" + name + ", getId()="
-				+ getId() + ", getEmail()=" + getEmail() + ", getPhoneNo()=" + getPhoneNo() + ", getName()=" + getName()
-				+ "]";
+		return "Customer [id=" + id + ", email=" + email + ", phoneNumber=" + phoneNumber + ", name=" + name+ "]";
 	}
 	
 	

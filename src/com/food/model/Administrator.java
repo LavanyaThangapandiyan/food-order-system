@@ -59,9 +59,7 @@ public class Administrator {
 	@Override
 	public String toString() {
 		return "Administrator [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", userName="
-				+ userName + ", password=" + password + ", menuId=" + menuId + ", getId()=" + getId()
-				+ ", getFirstName()=" + getFirstName() + ", getLastName()=" + getLastName() + ", getUserName()="
-				+ getUserName() + ", getPassword()=" + getPassword() + ", getMenuId()=" + getMenuId() + "]";
+				+ userName + ", password=" + password + ", menuId=" + menuId + "]";
 	}
 	
 

@@ -9,6 +9,6 @@ public interface AdministratorDao {
     public int deleteAdminDetails() throws ClassNotFoundException, SQLException;
     public void updatePassword(int adminId,String password) throws ClassNotFoundException, SQLException;
     public void updateUserName(int adminId,String userName) throws ClassNotFoundException, SQLException;
-    public void findMenuId() throws ClassNotFoundException, SQLException;	
+    public void findMenuId(int adminId) throws ClassNotFoundException, SQLException;	
 
 }

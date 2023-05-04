@@ -17,12 +17,15 @@ public class TestOrder {
 		//ConnectionUtil.getConnection();
 		Scanner sc=new Scanner(System.in);
 		OrderImpl order=new OrderImpl();
-		//order.deleteOrderDetails();
+		List<Order> orderList = order.orderList();
+		System.out.println(orderList);
+		/*
+		System.out.println("Do you want Delete the Order Details: \n Please Enter the Order ID:");
+		int orderId=sc.nextInt();
+		order.deleteOrderDetails();*/
 		//---->insert */
-				System.out.println("Enter Order ID:");
+				/*System.out.println("Enter Order ID:");
 			    int id=sc.nextInt();
-			    System.out.println("Enter Date ");
-			    String date=sc.next(); 
 			    System.out.println("Enter Customer Id");
 			    int customerId=sc.nextInt();
 			    System.out.println("Enter Quantity");
@@ -30,30 +33,12 @@ public class TestOrder {
 			    System.out.println("Enter Food Id");
 			     int foodId=sc.nextInt();   
 			        Order or=new Order();
-			        if(id>10) {
+			       
 			        	or.setId(id);
-			        Pattern p=Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
-			        Matcher m=p.matcher(date);
-			        boolean a=m.matches();
-			        if(a) {
-			        	or.setDate(date);
-			        if(customerId>0) {
 			        or.setCustomerId(customerId);
-			        if(quantity>0) {
 			        or.setQuantity(quantity);
-			        if(foodId>=2000) {
 			        	or.setFoodId(foodId);
-			        order.saveOrderDetails(or);}
-			        else
-			        	System.out.println("Invalid Food ID");
-			        }else
-			        	System.out.println("Invalid Quantity");
-			        }else
-			        	System.out.println("Invalid Customer ID");
-			        }else
-			        	System.out.println("Invalid Date");
-			        }else
-			        	System.out.println("Invalid Order Id");
+			        order.saveOrderDetails(or);
 			
 		/*System.out.println("Do you Want Find Order Quantity --> Enter 1\n Do you want Find Order Pickup Date -->Enter 2 ");
 		int number=sc.nextInt();
@@ -80,13 +65,11 @@ public class TestOrder {
         int orderId=sc.nextInt();
         System.out.println("Enter your New Quantity:");
         int quantity=sc.nextInt();
-        if(quantity>0)
         order.updateOrderQuantity(orderId, quantity);*/
        
 		
 				
-		/*List<Order> orderList = order.orderList();
-		System.out.println(orderList);*/
+		
 		
 		
 			
