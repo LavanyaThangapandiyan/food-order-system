@@ -30,7 +30,8 @@ Validation valid=new Validation();
 		ps.setInt(2,orit.getFoodId());
 		}else
 			System.out.println("Invalid food Id");
-		}System.out.println("Invalid id");
+		}else
+			System.out.println("Invalid id");
 		int executeUpdate = ps.executeUpdate();
 		System.out.println(executeUpdate);
 		Scanner sc=new Scanner(System.in);
@@ -38,28 +39,30 @@ Validation valid=new Validation();
 		int foodId=sc.nextInt();
 		String find="select unit_price from food_item where id=?";
 		PreparedStatement ps1=con.prepareStatement(find);
-		ps.setInt(1,foodId);
+		ps1.setInt(1,foodId);
 		ResultSet rs=ps1.executeQuery();
 		while(rs.next())
 		{
 			int price=rs.getInt(1);
 			String update="update order_item set unit_price=? where food_id=?";
 			PreparedStatement ps3=con.prepareStatement(update);
+			ps3.setInt(1,price);
+			ps3.setInt(2,foodId);
 			int executeUpdate2 = ps3.executeUpdate();
 			System.out.println(executeUpdate2);
 			System.out.println("Enter Order ID");
 			int orderId=sc.nextInt();
 			String find1="select quantity from orderr where id=?";
 			PreparedStatement ps4=con.prepareStatement(find1);
-			ps4.setInt(1,foodId);
+			ps4.setInt(1,orderId);
 			ResultSet rs4=ps4.executeQuery();
 			while(rs4.next())
 			{
 				int quantity=rs4.getInt(1);
-				String update1="update order_item set quantity=? where food_id=?";
+				String update1="update order_item set quantity=? where order_id=?";
 				PreparedStatement ps2=con.prepareStatement(update1);
-				ps2.setInt(1,foodId);
-				ps2.setInt(2,quantity);
+				ps2.setInt(1, quantity);
+				ps2.setInt(2,orderId);
 				int executeUpdate22 = ps2.executeUpdate();
 				System.out.println(executeUpdate22);
 		}

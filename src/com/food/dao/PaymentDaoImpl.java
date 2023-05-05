@@ -53,7 +53,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		int orderId=sc.nextInt();
 		String select="select quantity,unit_price from order_item where order_id=?";
 		PreparedStatement ps1=con.prepareStatement(select);
-		ps.setInt(1,orderId );
+		ps1.setInt(1,orderId );
 		ResultSet rs=ps1.executeQuery();
 		while(rs.next())
 		{
@@ -65,7 +65,7 @@ public class PaymentDaoImpl implements PaymentDao {
 			ps2.setInt(1,amount);
 			ps2.setInt(2,orderId);
 			int executeUpdate2 = ps2.executeUpdate();
-			System.out.println(executeUpdate);
+			System.out.println(executeUpdate2);
 		}	
 	}
 	@Override
@@ -112,7 +112,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		int paymentId=sc.nextInt();
 		String delete="delete from Payment where id=?";
 		PreparedStatement ps1=con.prepareStatement(delete);
-		ps.setInt(1,paymentId);
+		ps1.setInt(1,paymentId);
 		int executeUpdate = ps1.executeUpdate();
 		System.out.println(executeUpdate);
 		return executeUpdate ;

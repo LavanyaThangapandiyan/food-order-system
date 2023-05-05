@@ -16,7 +16,7 @@ public class TestPayment
 	{
 		//ConnectionUtil.getConnection();
 		PaymentDaoImpl pay=new PaymentDaoImpl();
-		//pay.deletePaymentDetails();
+	 //pay.deletePaymentDetails();
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter Payment id:");
 		int id=sc.nextInt();

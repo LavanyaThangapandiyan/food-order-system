@@ -47,8 +47,8 @@ public class MenuImpl implements MenuDao
 			System.out.println(price);
 			String update="update menu set price=? where food_id=?";
 			PreparedStatement ps11=con.prepareStatement(update);
-			ps.setInt(1, price);
-			ps.setInt(2, fodId1);
+			ps11.setInt(1, price);
+			ps11.setInt(2, fodId1);
 			int executeUpdate = ps11.executeUpdate();
 			System.out.println(executeUpdate);
 		}

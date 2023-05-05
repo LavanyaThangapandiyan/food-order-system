@@ -106,12 +106,9 @@ Validation valid=new Validation();
 	@Override
 	public int updateOrderQuantity(int orderId, int quantity) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		Order or=new Order();
 		Connection con=ConnectionUtil.getConnection();
 		String update="update orderr set quantity=? where id=?";
 		PreparedStatement ps=con.prepareStatement(update);
-		boolean quan=valid.numberValidation(or.getQuantity());
-		if(quan==true)
 		ps.setInt(1, orderId);
 		ps.setInt(2, quantity);
 		int executeUpdate = ps.executeUpdate();

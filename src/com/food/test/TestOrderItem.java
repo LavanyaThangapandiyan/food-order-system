@@ -20,8 +20,8 @@ public class TestOrderItem {
 		System.out.println("Enter Food ID");
 		int foodId=sc.nextInt();
 		OrderItem ord=new OrderItem();
-			ord.setId(orderId);
-				ord.setFoodId(foodId);
+		ord.setId(orderId);
+		ord.setFoodId(foodId);
         or.saveOrderItemDetails(ord);
 
 		

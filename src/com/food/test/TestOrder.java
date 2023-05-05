@@ -17,14 +17,14 @@ public class TestOrder {
 		//ConnectionUtil.getConnection();
 		Scanner sc=new Scanner(System.in);
 		OrderImpl order=new OrderImpl();
-		List<Order> orderList = order.orderList();
-		System.out.println(orderList);
+		//List<Order> orderList = order.orderList();
+		//System.out.println(orderList);
 		/*
 		System.out.println("Do you want Delete the Order Details: \n Please Enter the Order ID:");
 		int orderId=sc.nextInt();
 		order.deleteOrderDetails();*/
 		//---->insert */
-				/*System.out.println("Enter Order ID:");
+				System.out.println("Enter Order ID:");
 			    int id=sc.nextInt();
 			    System.out.println("Enter Customer Id");
 			    int customerId=sc.nextInt();

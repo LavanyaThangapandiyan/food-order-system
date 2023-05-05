@@ -79,8 +79,6 @@ public class CustomerImpl implements CustomerDao
 		Connection con=ConnectionUtil.getConnection();
 		String update="update customer set phone_number=? where id=?";
 		PreparedStatement ps=con.prepareStatement(update);
-		boolean phoneNumber=valid.phoneNumberValidation(cus.getPhoneNumber());
-		if(phoneNumber==true)
 		ps.setString(1,phoneNo);
 		ps.setInt(2,customerId);
 		int executeUpdate = ps.executeUpdate();
