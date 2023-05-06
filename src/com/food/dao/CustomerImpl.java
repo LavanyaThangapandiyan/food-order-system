@@ -19,38 +19,28 @@ public class CustomerImpl implements CustomerDao
 //Insert Customer details
 	@Override
 	public void saveCustomerDetails(Customer customer) throws ClassNotFoundException, SQLException {
-		boolean id=valid.idValidation(customer.getId());
+		Connection con=ConnectionUtil.getConnection();
+		String insert="insert into customer(email,phone_number,name)values(?,?,?)";
+		PreparedStatement ps=con.prepareStatement(insert);
 		boolean email=valid.emailValidation(customer.getEmail());
 		boolean phoneNumber=valid.phoneNumberValidation(customer.getPhoneNumber());
 		boolean name=valid.nameValidation(customer.getName());
-		Connection con=ConnectionUtil.getConnection();
-		String insert="insert into customer(id,email,phone_number,name)values(?,?,?,?)";
-		PreparedStatement ps=con.prepareStatement(insert);
-		if(id==true) {
-		ps.setInt(1,customer.getId());
-		if(email==true) {
-		ps.setString(2,customer.getEmail());
-		if(phoneNumber==true) {
-		ps.setString(3,customer.getPhoneNumber());
-		if(name==true) {
-		ps.setString(4, customer.getName());
-		}else
-			System.out.println("Invalid Name");
-		}else
-			System.out.println("Invalid Phone Number");
-		}else
-			System.out.println("Invalid Email Id");
-		}else
-			System.out.println("Invalid Id");
+		if(email==true && phoneNumber==true && name==true)
+		{
+		ps.setString(1,customer.getEmail());
+		ps.setString(2, customer.getPhoneNumber());
+		ps.setString(3, customer.getName());
 		int executeUpdate = ps.executeUpdate();
 		System.out.println(executeUpdate);	
 	}
+		else
+			System.out.println("Invalid Input For Customer Details");}
 	//List Customer Details
 	@Override
 	public List<Customer> customerList() throws ClassNotFoundException, SQLException 
 	{
 		// TODO Auto-generated method stub
-	    Connection con=ConnectionUtil.getConnection();
+		Connection con=ConnectionUtil.getConnection();
 	    String customerList="select id,email,phone_number,name from customer ";
 	    PreparedStatement ps=con.prepareStatement(customerList);
 	    ResultSet rs=ps.executeQuery();
@@ -70,17 +60,18 @@ public class CustomerImpl implements CustomerDao
 	    	
 	    }	
 		return customer;
+		
 	}
 	//Update Customer Phone Number By using Customer Id
 	@Override
-	public int updateCustomerPhoneNumber(int customerId,String phoneNo) throws ClassNotFoundException, SQLException {
+	public int updateCustomerPhoneNumber(int customerId1,String phoneNo) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		Customer cus=new Customer();
 		Connection con=ConnectionUtil.getConnection();
 		String update="update customer set phone_number=? where id=?";
 		PreparedStatement ps=con.prepareStatement(update);
 		ps.setString(1,phoneNo);
-		ps.setInt(2,customerId);
+		ps.setInt(2,customerId1);
 		int executeUpdate = ps.executeUpdate();
 		System.out.println(executeUpdate);
 		return executeUpdate;
@@ -133,6 +124,9 @@ public class CustomerImpl implements CustomerDao
 			System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3));
 		
 	}
+	
+	
+	
 
 	
 	

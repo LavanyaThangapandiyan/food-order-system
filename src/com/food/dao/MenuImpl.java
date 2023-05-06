@@ -16,29 +16,25 @@ public class MenuImpl implements MenuDao
 {
 	Validation valid=new Validation();
 	@Override
+	
 	//insert Menu details
 	public void saveMenuDetails(Menu menu) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
 		Connection con=ConnectionUtil.getConnection();
-		String insert="insert into menu(id,food_id)values(?,?)";
-		PreparedStatement ps1=con.prepareStatement(insert);
-		boolean id=valid.idValidation(menu.getId());
+		String insert="insert into menu(food_id)values(?)";
+		PreparedStatement ps111=con.prepareStatement(insert);
 		boolean foodId=valid.idValidation(menu.getFoodId());
-		if(id==true) {
-		ps1.setInt(1, menu.getId());
 		if(foodId==true) {
-		ps1.setInt(2,menu.getFoodId());
+		ps111.setInt(1,menu.getFoodId());
 		}else
 			System.out.println("Invalid Food ID");
-		}else
-			System.out.println("Invalid ID");
-		int executeUpdate2 = ps1.executeUpdate();
+		int executeUpdate2 = ps111.executeUpdate();
 		System.out.println(executeUpdate2);
-		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter Food ID");
 		int fodId1=sc.nextInt();	
-		String find="select unit_price from food_item where id=?";
-		PreparedStatement ps=con.prepareStatement(find);
+		String find1="select unit_price from food_item where id=?";
+		PreparedStatement ps=con.prepareStatement(find1);
 		ps.setInt(1, fodId1);
 		ResultSet rs=ps.executeQuery();
 		while(rs.next())
@@ -52,31 +48,32 @@ public class MenuImpl implements MenuDao
 			int executeUpdate = ps11.executeUpdate();
 			System.out.println(executeUpdate);
 		}
-	
 		
 	}
 //display the list of menuList
 	@Override
-	public List<Menu> menuList() throws ClassNotFoundException, SQLException {
+	public List<Menu> menuList() throws ClassNotFoundException, SQLException 
+	{
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
-		String s="select id,price,food_id from menu";
-		PreparedStatement ps=con.prepareStatement(s);
+		ArrayList<Menu> menu1=new ArrayList<>();
+		String menuList="select id,food_id from menu";
+	    PreparedStatement ps=con.prepareStatement(menuList);
 		ResultSet rs=ps.executeQuery();
-		ArrayList menu=new ArrayList<>();
 		while(rs.next())
 		{
-			int id=rs.getInt(1);
+			int cusid=rs.getInt(1);
 			int foodId=rs.getInt(2);
-			Menu obj=new Menu();
-			obj.setId(id);
+			 Menu obj=new Menu();
+			obj.setId(cusid);
 			obj.setFoodId(foodId);
-			menu.add(obj);
-			
+		    menu1.add(obj);	
 		}
+		return menu1;
 		
-		return menu;
 	}
+	
+
 	@Override
 	//delete the menu details
 	public int deleteMenuDetails() throws ClassNotFoundException, SQLException {

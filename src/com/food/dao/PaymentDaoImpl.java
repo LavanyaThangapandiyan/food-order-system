@@ -22,30 +22,18 @@ public class PaymentDaoImpl implements PaymentDao {
 		Connection con=ConnectionUtil.getConnection();
 		Date date=new Date();
 		java.sql.Date sqldate=new java.sql.Date(date.getTime());
-		String insert="insert into payment(id,customer_id,order_id,date,amount,type)values(?,?,?,?,?,?)";
+		String insert="insert into payment(customer_id,order_id,date,type)values(?,?,?,?)";
 		PreparedStatement ps=con.prepareStatement(insert);
-		boolean id=valid.idValidation(pay.getId());
 		boolean csid=valid.idValidation(pay.getCustomerId());
 		boolean orId=valid.idValidation(pay.getOrderId());
 		boolean type=valid.nameValidation(pay.getPaymentType());
-		if(id==true) {
-		ps.setInt(1, pay.getId());
-		if(csid==true) {
-		ps.setInt(2, pay.getCustomerId());
-		if(orId==true) {
-		ps.setInt(3, pay.getOrderId());
-		ps.setDate(4,sqldate);
-		ps.setDouble(5,pay.getAmount());
-		if(type==true) {
-		ps.setString(6, pay.getPaymentType());
+		if(csid==true&&orId==true&&type==true) {
+		ps.setInt(1, pay.getCustomerId());
+		ps.setInt(2, pay.getOrderId());
+		ps.setDate(3,sqldate);
+		ps.setString(4, pay.getPaymentType());
 		}else
-			System.out.println("Invalid input");
-		}else
-			System.out.println("Invalid input");
-		}else
-			System.out.println("Invalid input");
-		}else
-			System.out.println("Invalid input");
+			System.out.println("Invalid Payment details");
 		int executeUpdate = ps.executeUpdate();
 		System.out.println(executeUpdate);
 		Scanner sc=new Scanner(System.in);
@@ -66,7 +54,9 @@ public class PaymentDaoImpl implements PaymentDao {
 			ps2.setInt(2,orderId);
 			int executeUpdate2 = ps2.executeUpdate();
 			System.out.println(executeUpdate2);
-		}	
+		}
+		
+		
 	}
 	@Override
 	public List<Payment> paymentDetailsList() throws ClassNotFoundException, SQLException {
@@ -91,23 +81,17 @@ public class PaymentDaoImpl implements PaymentDao {
 		 pay.setPaymentDate((java.sql.Date) date);
 		 pay.setAmount(amount);
 		 pay.setAmount(amount);
+		 pay.setPaymentType(type);
 		 paymentList.add(pay);
 		}
-		return paymentList;
-	}
+		return paymentList;}
+		
+	
 	@Override
 	public int deletePaymentDetails() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
 		Scanner sc=new Scanner(System.in);
-		System.out.println("If you want to check The id is there \n enter the id");
-		int id=sc.nextInt();
-		String find="select id from payment where id=?";
-		PreparedStatement ps=con.prepareStatement(find);
-		ps.setInt(1, id);
-		ResultSet rs=ps.executeQuery();
-		while(rs.next())
-			System.out.println("the id is there"+rs.getInt(1));
 		System.out.println("If you want to delete Payment Details \n Enter Payment Id");
 		int paymentId=sc.nextInt();
 		String delete="delete from Payment where id=?";
@@ -117,6 +101,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		System.out.println(executeUpdate);
 		return executeUpdate ;
 	}
+	
 	
 
 }

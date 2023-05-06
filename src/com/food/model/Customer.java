@@ -10,7 +10,7 @@ public class Customer {
 	{
 		
 	}
-	public Customer(int id,String email,String phoneNo,String name)
+	public Customer(int id,String email,String phoneNumber,String name)
 	{
 		this.id=id;
 		this.email=email;
@@ -43,8 +43,8 @@ public class Customer {
 	}
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", email=" + email + ", phoneNumber=" + phoneNumber + ", name=" + name+ "]";
+		return "Customer [id=" + id + ", email=" + email + ", phoneNumber=" + phoneNumber + ", name=" + name
+				+ "]";
 	}
-	
 	
 }

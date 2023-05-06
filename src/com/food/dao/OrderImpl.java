@@ -23,7 +23,7 @@ Validation valid=new Validation();
 	{
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
-		String insert="insert into orderr(id,date,customer_id,quantity,food_id)values(?,?,?,?,?)";
+		String insert="insert into orderr(date,customer_id,quantity,food_id)values(?,?,?,?)";
 		PreparedStatement ps=con.prepareStatement(insert);
 		boolean id=valid.idValidation(or.getId());
 		boolean customerId=valid.idValidation(or.getCustomerId());
@@ -31,25 +31,15 @@ Validation valid=new Validation();
 		boolean foodId=valid.idValidation(or.getFoodId());
 		Date date=new Date();
 		java.sql.Date sqldate=new java.sql.Date(date.getTime());
-		if(id==true) {
-		ps.setInt(1, or.getId());
-		ps.setDate(2, sqldate);
-		if(customerId==true) {
-		ps.setInt(3,or.getCustomerId());
-		if(quantity==true) {
-		ps.setInt(4, or.getQuantity());
-		if(foodId==true) {
-		ps.setInt(5, or.getFoodId());
-		}else
-			System.out.println("Invalid Food Id");
-		}else
-			System.out.println("Invalid Quantity");
-		}else
-			System.out.println("Invalid Customer Id");
-		}else
-			System.out.println("Invalid Id");
+		if(customerId==true&&quantity==true&&foodId==true)
+		{
+		ps.setDate(1, sqldate);
+		ps.setInt(2,or.getCustomerId());
+		ps.setInt(3, or.getQuantity());
+		ps.setInt(4, or.getFoodId());
 		int executeUpdate = ps.executeUpdate();
 		System.out.println(executeUpdate);
+		}
 		
 	}
 
@@ -84,15 +74,6 @@ Validation valid=new Validation();
 		// TODO Auto-generated method stub
 		Scanner sc=new Scanner(System.in);
 		Connection con=ConnectionUtil.getConnection();
-		System.out.println("if you want to check the id is there \n please enter the id");
-		int id=sc.nextInt();
-		String find="select id from orderr where id=?";
-		PreparedStatement ps=con.prepareStatement(find);
-		ps.setInt(1, id);
-		ResultSet rs=ps.executeQuery();
-		while(rs.next())
-			System.out.println("the id is there :" +rs.getInt(1));
-		
 		System.out.println("Enter Order ID");
 		int orderId=sc.nextInt();
 		String delete="delete from orderr where id=?";

@@ -32,14 +32,6 @@ public boolean passwordValidation(String password)
 	else
 		return false;	
 }
-public boolean menuIdValidation(int menuId)
-{
-	if(menuId>100)
-		return true;
-	else
-	return false;
-	
-}
 public boolean emailValidation(String email)
 {
 	Pattern p=Pattern.compile("^(.+)@(.+)$");
@@ -52,7 +44,7 @@ public boolean emailValidation(String email)
 					}
 public boolean phoneNumberValidation(String phoneNumber)
 {
-	Pattern p=Pattern.compile("(0/91)?[7-9][0-9]{9}");
+	Pattern p=Pattern.compile("(0|91)?[6-9][0-9]{9}");
     Matcher m=p.matcher(phoneNumber);
     boolean phn=m.matches();
     if(phn)

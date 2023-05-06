@@ -24,14 +24,11 @@ Validation valid=new Validation();
 		PreparedStatement ps=con.prepareStatement(insert);
 		boolean id=valid.idValidation(orit.getId());
 		boolean fodId=valid.idValidation(orit.getFoodId());
-		if(id==true) {
+		if(id==true &&fodId==true ) {
 		ps.setInt(1, orit.getId());
-		if(fodId==true) {
 		ps.setInt(2,orit.getFoodId());
 		}else
-			System.out.println("Invalid food Id");
-		}else
-			System.out.println("Invalid id");
+			System.out.println("Invalid input");
 		int executeUpdate = ps.executeUpdate();
 		System.out.println(executeUpdate);
 		Scanner sc=new Scanner(System.in);
@@ -101,14 +98,6 @@ Validation valid=new Validation();
 		// TODO Auto-generated method stub
 		Connection con=ConnectionUtil.getConnection();
 		Scanner sc=new Scanner(System.in);
-		System.out.println("if you want to check the id is there \n Enter the id");
-		int id=sc.nextInt();
-		String find="select id from order_item where id=?";
-		PreparedStatement ps=con.prepareStatement(find);
-		ps.setInt(1, id);
-		ResultSet rs=ps.executeQuery();
-		while(rs.next())
-			System.out.println("THE ID IS THERE:"+rs.getInt(1));
 		System.out.println(" if you want delete order item \n Enter food id");
 		int orderId=sc.nextInt();
 		String delete="delete from order_item where food_id=?";
